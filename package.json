@@ -1,0 +1,19 @@
+{
+  "name": "advanced_newsletter_system",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "cheerio": "^1.1.2",
+    "playwright": "^1.54.2"
+  },
+  "scripts": {
+    "start": "bun src/index.ts"
+  }
+}

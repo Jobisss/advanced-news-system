@@ -1,0 +1,17 @@
+name: bun-playwright-stack
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: bun-playwright:latest
+    container_name: bun-playwright-app
+    command: ["bun", "run", "start"]
+    ipc: host
+    working_dir: /app
+    networks:
+      - internal
+networks:
+  internal:
+    driver: bridge
