@@ -5,7 +5,7 @@ const robotsTxt = await scrappingService.fetchRobotsTxt('https://g1.globo.com');
 const rules = await scrappingService.parseRobotsTxt(robotsTxt);
 
 const sitemapUrl = 'https://g1.globo.com/sitemap/g1/2025/07/22_1.xml';
-const xml = await scrappingService.fetchXmlText(sitemapUrl) // use seu método que baixa XML! (ex.: fetchXmlText)
+const xml = await scrappingService.fetchXmlText(sitemapUrl) 
   .catch(() => ''); 
 
   const { analysis, newUrls, newHashes, allUrls, allHashes } =

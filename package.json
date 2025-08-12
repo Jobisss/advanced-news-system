@@ -4,14 +4,17 @@
   "type": "module",
   "private": true,
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "drizzle-kit": "^0.31.4"
   },
   "peerDependencies": {
     "typescript": "^5"
   },
   "dependencies": {
     "cheerio": "^1.1.2",
-    "playwright": "^1.54.2"
+    "drizzle-orm": "^0.44.4",
+    "playwright": "^1.54.2",
+    "postgres": "^3.4.7"
   },
   "scripts": {
     "start": "bun src/index.ts"

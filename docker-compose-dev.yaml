@@ -1,17 +1,50 @@
 name: bun-playwright-stack
 
-services:
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: bun-playwright:latest
-    container_name: bun-playwright-app
-    command: ["bun", "run", "start"]
-    ipc: host
+services:  
+  app:  
+    build:  
+      context: .  
+      dockerfile: Dockerfile  
+    image: advanced-news-system:latest  
+    container_name: advanced-news-app  
+    command: ["bun", "run", "dev"]  
     working_dir: /app
-    networks:
-      - internal
-networks:
-  internal:
+    env_file:
+      - .env
+    environment:
+      - DATABASE_URL=postgresql://relevantUser123!@$:xYzArqvcr!125#5@postgres:5432/newsletter
+      - NODE_ENV=development  
+    depends_on:  
+      postgres:  
+        condition: service_healthy  
+    networks:  
+      - internal  
+    volumes:  
+      - .:/app  
+      - /app/node_modules  
+  
+  postgres:  
+    image: postgres:16-alpine  
+    container_name: advanced-news-postgres  
+    environment:  
+      POSTGRES_DB: newsletter  
+      POSTGRES_USER: relevantUser123!@$  
+      POSTGRES_PASSWORD: xYzArqvcr!125#5  
+    ports:  
+      - "5432:5432"  
+    volumes:  
+      - postgres_data:/var/lib/postgresql/data  
+      - ./migrations:/docker-entrypoint-initdb.d  
+    networks:  
+      - internal  
+    healthcheck:  
+      test: ["CMD-SHELL", "pg_isready -U relevantUser123!@$ -d newsletter"]  
+      interval: 5s  
+      timeout: 5s  
+      retries: 5
+volumes:  
+  postgres_data:  
+  
+networks:  
+  internal:  
     driver: bridge
